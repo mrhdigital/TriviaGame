@@ -69,7 +69,7 @@ var questions = [
 var game = {
       // Create countdown method to set timer
       // variable counter with initial time remaining set to 30 secs.
-      counter: 5,
+      counter: 30,
       correct: 0,
       incorrect: 0,
       unanswered: 0,
@@ -187,7 +187,15 @@ var game = {
         $("#subwrapper").append("<h3>Incorrect: " +game.incorrect + "</h3>");
         $("#subwrapper").append("<h3>Unanswered: " +game.unanswered + "</h3>");
         $("#subwrapper").append("<button id = 'reset' > RESET </button>");
-    }
+    },
+    reset: function () {
+        game.currentQuestion = 0;
+        game.counter = 30;
+        game.correct = 0;
+        game.incorrect = 0;
+        game. unanswered = 0;
+        game.loadQuestion();
+       }   
 }
 
 
@@ -208,4 +216,8 @@ $("#start").on("click",function() {
 $(document).on("click", ".answer-button", function(e) {
     game.clicked(e);
 
+})
+// click event generated for reset
+$(document).on("click", "#reset", function() {
+    game.reset();
 })
