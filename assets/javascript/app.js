@@ -118,8 +118,17 @@ var game = {
     },
     timeUp: function() {
         clearInterval(timer);
-                    setTimeout(game.nextQuestion,3*1000);
-    
+        game.unanswered++;
+        console.log(game.unanswered);
+        $("#subwrapper").html("<h2> OUT OF TIME! </h2>");
+        $("#subwrapper").append("<h3> The Correct Answer Was:"+
+        questions[game.currentQuestion].correctAnswer+ " </h3>");
+        if(game.currentQuestion == questions.length-1) {
+            setTimeout(game.results,3*1000);                
+        } 
+        else {
+            setTimeout(game.nextQuestion,3*1000);
+        }
     },
 
     clicked: function(e) {
@@ -170,6 +179,15 @@ var game = {
             setTimeout(game.nextQuestion,3*1000);
         }
     },
+    // this function append the reults to the html  and append the reset button
+    results: function() {
+        clearInterval(timer);
+        $("#subwrapper").html("<h2>ALL DONE!</h2>");
+        $("#subwrapper").append("<h3>Correct: " +game.correct +"</h3>");
+        $("#subwrapper").append("<h3>Incorrect: " +game.incorrect + "</h3>");
+        $("#subwrapper").append("<h3>Unanswered: " +game.unanswered + "</h3>");
+        $("#subwrapper").append("<button id = 'reset' > RESET </button>");
+    }
 }
 
 
@@ -178,13 +196,12 @@ var game = {
 
 // MAIN PROCESSES
 //*****************************************************************************************/
-// Starts the game the First Time.
+// Starts the game.
 
 $("#start").on("click",function() {
     $("#start").remove();
     game.loadQuestion();
-    
-})
+});
 
 //check all the document as "answer-button was dynamically loading, it did not exist in the page
 // "e" will pass the values of event(button) being clicked
