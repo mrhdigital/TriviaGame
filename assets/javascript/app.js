@@ -70,6 +70,12 @@ var game = {
       // Create countdown method to set timer
       // variable counter with initial time remaining set to 30 secs.
       counter: 5,
+      correct: 0,
+      incorrect: 0,
+      unanswered: 0,
+      questions: questions,
+      currentQuestion:0,
+      
       countdown: function() {
         game.counter--;
         //populate the decremental values of counter in html
