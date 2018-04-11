@@ -103,6 +103,7 @@ var game = {
             var numOfTotalAnswers = questions[game.currentQuestion].answers.length;
             for(var i = 0; i < numOfTotalAnswers; i++) {
                 //create the buttons and store the answers in the button using "data-name"
+                // later will be used to see if correct answered was clicked or not
                 $('#subwrapper').append('<button class = "answer-button" id = "button-'+ 
                 i + '" data-name = "' +questions[game.
                 currentQuestion].answers[i]+'">' + questions[game.
@@ -123,6 +124,9 @@ var game = {
 
     clicked: function(e) {
         clearInterval(timer);
+        //check the value of e.targer data
+        //console.log($(e.target).data("name"));
+        // compare it with the correct answer
         if($(e.target).data("name")==questions[game.currentQuestion].correctAnswer) {
             game.answeredCorrectly();                
         }
@@ -131,13 +135,14 @@ var game = {
         }
 
     },
+    // This method increment the correct count and load the message into the html
     answeredCorrectly: function() {
         console.log("YOU GOT IT!");
         clearInterval(timer);
         game.correct++;
         $("#subwrapper").html("<h2> YOU GOT IT RIGHT! </h2>");
                 
-
+        // append the right image 
         $("#subwrapper").append('<img src="' + questions[game.currentQuestion].image + '" />');
         if(game.currentQuestion == questions.length-1) {
             setTimeout(game.results, 3*1000);
@@ -147,6 +152,7 @@ var game = {
         }
 
     },
+    // This method increment the incorrect count and load the message into the html
     answeredIncorrectly: function () {
         console.log("WRONG !");
         clearInterval(timer);
@@ -155,6 +161,7 @@ var game = {
         $("#subwrapper").html("<h2 style = 'color:red;'' > YOU GOT IT WRONG! </h2>");
         $("#subwrapper").append("<h3> The Correct Answer Was:"+
         questions[game.currentQuestion].correctAnswer+ " </h3>");
+        // append the right image
         $("#subwrapper").append('<img src="' + questions[game.currentQuestion].image + '" />');
         if(game.currentQuestion == questions.length-1) {
             setTimeout(game.results, 3*1000);
@@ -178,6 +185,9 @@ $("#start").on("click",function() {
     game.loadQuestion();
     
 })
+
+//check all the document as "answer-button was dynamically loading, it did not exist in the page
+// "e" will pass the values of event(button) being clicked
 $(document).on("click", ".answer-button", function(e) {
     game.clicked(e);
 
