@@ -61,11 +61,47 @@ var questions = [
 		correctAnswer:"Tokyo",
 	    image: "assets/images/tokyo.jpg"
     }];
-    console.log(questions);
+    //console.log(questions);
 
     // OBJECT
 //*****************************************************************************************/
 
+var game = {
+      // Create countdown method to set timer
+      // variable counter with initial time remaining set to 30 secs.
+      counter: 5,
+      countdown: function() {
+        game.counter--;
+        //populate the decremental values of counter in html
+        $("#counter").html(game.counter);
+        if(game.counter <= 0) {
+            console.log("TIME UP!");
+            game.timeUp();
+            
+           
+        }
+    },
+
+      loadQuestion: function() {
+          // alert("loadQuesion method works");
+          
+          //populate the html with id = counter
+          $("#subwrapper").html("<h5> TIME REMAINING <span id = 'counter'> 30 </span> Seconds </h5>");
+          // create the countdown time for each second
+          timer = setInterval(game.countdown, 1000);
+      },
+      nextQuestion: function() {
+        game.counter = 30;
+        $("#counter").html(game.counter);
+        
+        game.loadQuestion();
+    },
+    timeUp: function() {
+        clearInterval(timer);
+                    setTimeout(game.nextQuestion,3*1000);
+    
+    },
+}
 
 
 
@@ -77,5 +113,6 @@ var questions = [
 
 $("#start").on("click",function() {
     $("#start").remove();
+    game.loadQuestion();
     
 })
