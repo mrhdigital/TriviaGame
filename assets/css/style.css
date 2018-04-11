@@ -5,3 +5,19 @@
     font-weight: bolder;
     padding: 20px;
     font-size: 45px;
+}
+
+body {
+    background-image: url("../images/worldMap.jpeg");
+    background-size: cover;
+    font-family: 'Karla', sans-serif;
+}     
+
+#subwrapper {
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 5px solid #850404;
+    height: 500px;
+    width: 50%;
+    text-align: center;
+}    
