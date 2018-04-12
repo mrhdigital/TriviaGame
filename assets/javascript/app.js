@@ -4,7 +4,7 @@ var questions = [
 	{
 		question: "What is the Capital of Italy?", 
 	    answers: ["Sana'a", "Rome", "Cairo", "Madrid"],
-		correctAnswer: "Sana'a",
+		correctAnswer: "Rome",
 	    image: "assets/images/rome.jpg"
 	 },
 	 {
@@ -116,6 +116,7 @@ var game = {
         game.currentQuestion++;
         game.loadQuestion();
     },
+    
     timeUp: function() {
         clearInterval(timer);
         game.unanswered++;
@@ -123,6 +124,7 @@ var game = {
         $("#subwrapper").html("<h2> OUT OF TIME! </h2>");
         $("#subwrapper").append("<h3> The Correct Answer Was:"+
         questions[game.currentQuestion].correctAnswer+ " </h3>");
+        $("#subwrapper").append('<img src="' + questions[game.currentQuestion].image + '" />');
         if(game.currentQuestion == questions.length-1) {
             setTimeout(game.results,3*1000);                
         } 
