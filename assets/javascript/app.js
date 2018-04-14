@@ -67,7 +67,7 @@ var questions = [
 //*****************************************************************************************/
 
 var game = {
-      // Create countdown method to set timer
+      // VARIABLES
       // variable counter with initial time remaining set to 30 secs.
       counter: 30,
       correct: 0,
@@ -75,7 +75,7 @@ var game = {
       unanswered: 0,
       questions: 0,
       currentQuestion:0,
-
+          // Create countdown method to set timer
       countdown: function() {
         game.counter--;
         //populate the decremental values of counter in html
@@ -102,7 +102,8 @@ var game = {
             //append all the answers of the question selected
             var numOfTotalAnswers = questions[game.currentQuestion].answers.length;
             for(var i = 0; i < numOfTotalAnswers; i++) {
-                //create the buttons and store the answers in the button using "data-name"
+                //create the buttons and store the answers in the button using 
+                // custom  data attribute "data-name"
                 // later will be used to see if correct answered was clicked or not
                 $('#subwrapper').append('<button class = "answer-button" id = "button-'+ 
                 i + '" data-name = "' +questions[game.
@@ -135,7 +136,7 @@ var game = {
 
     clicked: function(e) {
         clearInterval(timer);
-        //check the value of e.targer data
+        //check the value of e.target data
         //console.log($(e.target).data("name"));
         // compare it with the correct answer
         if($(e.target).data("name")==questions[game.currentQuestion].correctAnswer) {
